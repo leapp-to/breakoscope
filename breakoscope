@@ -1,0 +1,58 @@
+#!/bin/bash
+
+# Breakoscope project is licensed under the LGPL-3.0 License
+#
+# Pavel Odvody <podvody@redhat.com> - 2017
+
+# Helper script for invoking a standalone Breakoscope module
+#
+
+set -e
+
+case $1 in
+    -vv)
+      _verbose=2 ; shift 
+      ;;
+    -v) 
+      _verbose=1 ; shift 
+      ;;
+    -h) 
+      echo $(basename $0) "[-h | -v] MODULE"
+      echo "Execute Breakoscope module and output JSON formatted output"
+      echo ""
+      echo "Options:"
+      echo ""
+      echo "  -v   : print verbose information to stderr"
+      echo "  -vv  : print very verbose information to stderr"
+      echo "  -h   : display this information and exit"
+      exit 0 
+      ;;
+esac
+
+_root=${BREAKOSCOPE_MODULE_ROOT:-'/var/lib/breakoscope/'}
+_tmpfile=$(mktemp /tmp/breakoscope-result-$$.XXXXXX)
+_vebose=0
+_module=$1/definition.yml
+
+cd $_root
+
+if [[ ! -e $_module ]]; then
+    >&2 echo module not found: $1
+    exit 1
+fi
+
+if [[ $_verbose -ge 1 ]]; then 
+   >&2 echo "modules_root:	$_root"
+   >&2 echo "module:		$1"
+   >&2 echo "module_file:	${_root%%/}/$_module"
+   >&2 echo "result_file: 	$_tmpfile"
+fi
+
+if [[ $_verbose -ge 2 ]]; then 
+    gdb -P breakoscope.py $_module $_tmpfile 1>&2
+else
+    gdb -P breakoscope.py $_module $_tmpfile 1>/dev/null 2>/dev/null
+fi
+
+cat $_tmpfile
+rm -f $_tmpfile

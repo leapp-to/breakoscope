@@ -1,0 +1,12 @@
+---
+
+name: Logrotate module
+binary: /usr/sbin/logrotate
+package: logrotate
+args: /etc/logrotate.conf
+versions:
+  3.9.2-5:
+    breakpoints:
+    - spec: readConfigFile
+      source: py:logrotate.logrotate_handler
+    terminator: logrotate.c:2545

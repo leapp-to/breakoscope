@@ -1,0 +1,11 @@
+---
+
+name: nginx module
+binary: /usr/sbin/nginx
+package: nginx
+versions:
+  1.10.2-1:
+    breakpoints:
+    - spec: ngx_conf_file.c:122
+      source: filename->data
+    terminator: ngx_cycle.c:280

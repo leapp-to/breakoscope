@@ -1,0 +1,11 @@
+---
+
+name: MariaDB module
+binary: /usr/libexec/mysqld
+package: mariadb-server
+versions:
+  10.1.21-3:
+    breakpoints:
+    - spec: my_default.c:803
+      source: name
+    terminator: mysqld.cc:5542
