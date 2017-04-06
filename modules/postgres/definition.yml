@@ -1,0 +1,14 @@
+name: PostgreSQL module
+binary: /usr/bin/postgres
+package: postgresql
+versions:
+  9.5.5-1:
+    breakpoints:
+    - spec: ParseConfigFp
+      source: config_file
+    - spec: set_config_option if $_streq(name, "hba_file") == 1
+      source: value
+    - spec: guc.c:4576
+      source: fname
+    terminator: postmaster.c:843
+args: -D /var/lib/pgsql/data
