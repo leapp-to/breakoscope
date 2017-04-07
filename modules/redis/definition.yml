@@ -1,0 +1,10 @@
+name: Redis module
+binary: /usr/bin/redis-server
+package: redis
+versions:
+  3.0.6-3:
+    breakpoints:
+    - spec: loadServerConfig
+      source: filename
+    terminator: redis.c:3666
+args: /etc/redis.conf
