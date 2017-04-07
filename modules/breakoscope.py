@@ -156,7 +156,8 @@ def _breakoscope_invoke(module_path=None, outfile=None):
                 eval(compile(code, '<dynamic>', 'exec'))
                 func = locals()[f]
             else:
-                func = string_result_append(source=breakpoint['source'])
+                func = string_result_append(source=breakpoint['source'], 
+                                            dest=breakpoint.get('dest', 'config_files'))
             breakpoints.append((breakpoint['spec'], func))
         I.versions[version] = {'breakpoints': breakpoints, 'terminator': handler['terminator']}
     # Module loading done, run now
