@@ -1,0 +1,17 @@
+{
+    "config_files": [
+        "/etc/httpd/conf.modules.d/00-optional.conf",
+        "/etc/httpd/conf.d/userdir.conf",
+        "/etc/httpd/conf.modules.d/00-base.conf",
+        "/etc/httpd/conf.modules.d/00-dav.conf",
+        "/etc/httpd/conf.modules.d/00-proxy.conf",
+        "/etc/httpd/conf.d/autoindex.conf",
+        "/etc/httpd/conf.modules.d/01-cgi.conf",
+        "/etc/httpd/conf.modules.d/00-mpm.conf",
+        "/etc/httpd/conf.d/welcome.conf",
+        "/opt/httpd/my.conf",
+        "/etc/httpd/conf/httpd.conf",
+        "/etc/httpd/conf.modules.d/00-lua.conf",
+        "/etc/httpd/conf.modules.d/00-systemd.conf"
+    ]
+}

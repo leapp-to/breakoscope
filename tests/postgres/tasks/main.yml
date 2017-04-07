@@ -1,0 +1,30 @@
+- name: Ensure Postgres is installed
+  dnf:
+    name: redis-3.0.6-3.fc24.x86_64
+    state: present
+
+- name: Check contents of default directory
+  shell: ls -l /var/lib/pgsql/data | wc -l
+  register: pgdata
+
+- name: Ensure Postgres is configured
+  command: postgresql-setup --initdb
+  when: pgdata.rc != 0 or pgdata.stdout|int == 0
+
+- name: Ensure custom Postgres directory
+  file:
+    name: /opt/postgres
+    state: directory
+
+- name: Copy conf for Postgres
+  template: 
+    src: my.conf
+    dest: /opt/postgres/my.conf
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Reference our file in default config
+  lineinfile:
+    name: /var/lib/pgsql/data/postgresql.conf
+    line: include = '/opt/postgres/my.conf'

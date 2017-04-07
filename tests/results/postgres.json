@@ -1,0 +1,9 @@
+{
+    "config_files": [
+        "/var/lib/pgsql/data/pg_ident.conf",
+        "/var/lib/pgsql/data/postgresql.conf",
+        "/var/lib/pgsql/data/postgresql.auto.conf",
+        "/var/lib/pgsql/data/pg_hba.conf",
+        "/opt/postgres/my.conf"
+    ]
+}

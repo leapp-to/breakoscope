@@ -1,0 +1,22 @@
+- name: Ensure Redis is installed
+  dnf:
+    name: redis-3.0.6-3.fc24.x86_64
+    state: present
+
+- name: Ensure custom Redis directory
+  file:
+    name: /opt/redis
+    state: directory
+
+- name: Copy conf for Redis
+  template: 
+    src: my.conf
+    dest: /opt/redis/my.conf
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Reference our file in default config
+  lineinfile:
+    name: /etc/redis.conf
+    line: include /opt/redis/my.conf

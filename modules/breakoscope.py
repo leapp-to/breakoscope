@@ -33,6 +33,7 @@ def dict_append_list(dictionary, key, value):
         dictionary[key] = [value]
     else:
         dictionary[key].append(value)
+    dictionary[key] = list(set(dictionary[key]))
 
 
 def get_string_value(spec):

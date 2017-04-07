@@ -1,0 +1,11 @@
+{
+    "config_files": [
+        "/etc/my.cnf.d/mariadb-server.cnf",
+        "/etc/my.cnf.d/mysql-clients.cnf",
+        "/etc/my.cnf",
+        "/etc/my.cnf.d/tokudb.cnf",
+        "/opt/mariadb/my.cnf",
+        "/etc/my.cnf.d/client.cnf",
+        "/etc/my.cnf.d/auth_gssapi.cnf"
+    ]
+}
