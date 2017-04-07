@@ -1,0 +1,22 @@
+- name: Ensure MariaDB Server is installed
+  dnf:
+    name: mariadb-server-3:10.1.21-3.fc24.x86_64
+    state: present
+
+- name: Ensure custom MariaDB directory
+  file:
+    name: /opt/mariadb
+    state: directory
+
+- name: Copy conf for MariaDB
+  template: 
+    src: my.cnf
+    dest: /opt/mariadb/my.cnf
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Reference our file in default config
+  lineinfile:
+    name: /etc/my.cnf
+    line: '!includedir /opt/mariadb/'

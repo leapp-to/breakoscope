@@ -1,0 +1,17 @@
+{
+    "config_files": [
+        "/etc/logrotate.d/samba",
+        "/etc/logrotate.d/ppp",
+        "/etc/logrotate.d/rsyslog",
+        "/etc/logrotate.d/redis",
+        "/etc/logrotate.d/mariadb",
+        "/etc/logrotate.d/sssd",
+        "/etc/logrotate.d/nginx",
+        "/etc/logrotate.d/psacct",
+        "/opt/logrotate/my.conf",
+        "/etc/logrotate.d/chrony",
+        "/etc/logrotate.d/dnf",
+        "/etc/logrotate.d/httpd",
+        "/etc/logrotate.conf"
+    ]
+}

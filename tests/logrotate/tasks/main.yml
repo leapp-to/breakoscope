@@ -1,0 +1,22 @@
+- name: Ensure Logrotate is installed
+  dnf:
+    name: logrotate-3.9.2-5.fc24.x86_64
+    state: present
+
+- name: Ensure custom Logrotate directory
+  file:
+    name: /opt/logrotate
+    state: directory
+
+- name: Copy conf for logrotate
+  template: 
+    src: my.conf
+    dest: /opt/logrotate/my.conf
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Reference our file in default config
+  lineinfile:
+    name: /etc/logrotate.conf
+    line: include /opt/logrotate/my.conf

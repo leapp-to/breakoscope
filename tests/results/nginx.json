@@ -1,0 +1,7 @@
+{
+    "config_files": [
+        "/opt/nginx/my.conf",
+        "/etc/nginx/nginx.conf",
+        "/etc/nginx/mime.types"
+    ]
+}

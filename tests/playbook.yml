@@ -1,0 +1,8 @@
+- hosts: localhost
+  roles:
+    - httpd
+    - logrotate
+    - mariadb
+    - nginx
+    - postgres
+    - redis

@@ -1,0 +1,26 @@
+- name: Ensure nginx is installed
+  dnf:
+    name: nginx-1:1.10.2-1.fc24.x86_64
+    state: present
+
+- name: Ensure custom nginx directory
+  file:
+    name: /opt/nginx
+    state: directory
+
+- name: Copy conf for nginx
+  template: 
+    src: my.conf
+    dest: /opt/nginx/my.conf
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Reference our file in default config
+  lineinfile:
+    name: /etc/nginx/nginx.conf
+    regexp: '^\s*server {'
+    line: '    include /opt/nginx/my.conf;
+
+
+               server {'
