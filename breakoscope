@@ -33,6 +33,16 @@ _root=${BREAKOSCOPE_MODULE_ROOT:-'/var/lib/breakoscope/'}
 _tmpfile=$(mktemp /tmp/breakoscope-result-$$.XXXXXX)
 _vebose=0
 _module=$1/definition.yml
+_module_path=${_root%%/}/$_module
+# Optimally we should get this by parsing the YAML file, but since
+# we can't really do that in bash, just use grep & sed to get 
+# the defined username/uid
+_run_as=$(grep '^user:' $_module_path | sed 's/user: \(.*\)$/\1/g')
+
+_become=
+if [[ $_run_as != "" ]]; then
+    _become="sudo -u $_run_as"
+fi
 
 cd $_root
 
@@ -44,14 +54,15 @@ fi
 if [[ $_verbose -ge 1 ]]; then 
    >&2 echo "modules_root:	$_root"
    >&2 echo "module:		$1"
-   >&2 echo "module_file:	${_root%%/}/$_module"
+   >&2 echo "module_file:	$_module_path"
    >&2 echo "result_file: 	$_tmpfile"
+   >&2 echo "as_user:           ${_run_as:-$(id -n -u)}"
 fi
 
 if [[ $_verbose -ge 2 ]]; then 
-    gdb -P breakoscope.py $_module $_tmpfile 1>&2
+    $_become gdb -P breakoscope.py $_module $_tmpfile 1>&2
 else
-    gdb -P breakoscope.py $_module $_tmpfile 1>/dev/null 2>/dev/null
+    $_become gdb -P breakoscope.py $_module $_tmpfile 1>/dev/null 2>/dev/null
 fi
 
 cat $_tmpfile
