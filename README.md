@@ -83,6 +83,7 @@ The list of supported keys and their purpose is as follows:
 | `name` | Generic name of the module |
 | `binary` | Absolute path to a binary to execute |
 | `package` | RPM package containing the binary |
+| `user` | Execute the analysis as a specific user |
 | `versions` | Dictionary of breakpoint mappings for different versions of the package |
 | `versions.breakpoints` | A lists of breakpoints that will be used to extract data |
 | `versions.breakpoints.spec` | Location specification |
