@@ -1,3 +1,5 @@
+---
+
 name: PostgreSQL module
 binary: /usr/bin/postgres
 package: postgresql
@@ -12,3 +14,4 @@ versions:
       source: fname
     terminator: postmaster.c:843
 args: -D /var/lib/pgsql/data
+user: postgres
